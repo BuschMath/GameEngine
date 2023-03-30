@@ -151,6 +151,7 @@
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="MessageReceiver.h" />
+    <ClInclude Include="MessagingSystem.h" />
     <ClInclude Include="PositionComponent.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="RenderSystem.h" />
@@ -164,6 +165,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MessagingSystem.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

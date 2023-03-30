@@ -3,7 +3,7 @@
 
 #include "MessageReceiver.h"
 
-class Component : MessageReceiver {
+class Component : public MessageReceiver {
 public:
     virtual ~Component() {}
     virtual void receiveMessage(Message* msg) override;
