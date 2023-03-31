@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\busch\source\repos\GameEngine\GameEngine\GLFW\include;C:\Users\busch\source\repos\GameEngine\GameEngine\GLEW\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\busch\source\repos\GameEngine\GameEngine\glm;C:\Users\busch\source\repos\GameEngine\GameEngine\GLFW\include;C:\Users\busch\source\repos\GameEngine\GameEngine\GLEW\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\busch\source\repos\GameEngine\GameEngine\GLEW\bin\Release\Win32;C:\Users\busch\source\repos\GameEngine\GameEngine\GLEW\lib\Release\Win32;C:\Users\busch\source\repos\GameEngine\GameEngine\GLFW\lib-vc2019;C:\Users\busch\source\repos\GameEngine\GameEngine\GLEW\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -149,12 +149,16 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="EntityManager.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="MessageReceiver.h" />
     <ClInclude Include="MessagingSystem.h" />
     <ClInclude Include="PositionComponent.h" />
     <ClInclude Include="RenderComponent.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="RenderSystem.h" />
+    <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="SystemBase.h" />
     <ClInclude Include="SystemFactory.h" />
     <ClInclude Include="SystemManager.h" />
@@ -165,7 +169,9 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MessagingSystem.cpp" />
+    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
