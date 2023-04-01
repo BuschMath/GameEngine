@@ -21,6 +21,8 @@ public:
     // Sends a message to a specific component
     void sendMessage(Message* msg, MessageReceiver* recipient);
 
+    void update(float deltaTime);
+
 private:
     std::vector<MessageReceiver*> m_components;
 };

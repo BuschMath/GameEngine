@@ -20,6 +20,7 @@ public:
     void clear(float r, float g, float b, float a);
     const std::string& getTitle() const;
     GLFWwindow* getWindowHandle() const;
+    void processInput();
 
 private:
     GLFWwindow* m_window;

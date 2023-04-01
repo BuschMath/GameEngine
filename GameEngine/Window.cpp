@@ -1,4 +1,3 @@
-
 #include "Window.h"
 #include <iostream>
 
@@ -99,4 +98,11 @@ void Window::swapBuffers()
 void Window::pollEvents()
 {
     glfwPollEvents();
+}
+
+void Window::processInput()
+{
+    if (glfwGetKey(m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        glfwSetWindowShouldClose(m_window, true);
+    }
 }
