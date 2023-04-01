@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <glm.hpp>
+#include <GL/glew.h>
 
 class Mesh {
 public:
@@ -17,9 +18,18 @@ public:
     const std::vector<Vertex>& getVertices() const;
     const std::vector<unsigned int>& getIndices() const;
 
+    int getIndexCount() { return m_indices.size(); };
+    GLuint getVAO() const { return m_VAO; };
+    GLuint getVBO() const { return m_VBO; };
+    GLuint getEBO() const { return m_EBO; };
+
+
 private:
     std::vector<Vertex> m_vertices;
     std::vector<unsigned int> m_indices;
+    GLuint m_VAO;
+    GLuint m_VBO;
+    GLuint m_EBO;
 };
 
 #endif // !MESH_H

@@ -29,26 +29,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -72,8 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\busch\source\repos\GameEngine\GameEngine\glm;C:\Users\busch\source\repos\GameEngine\GameEngine\GLFW\include;C:\Users\busch\source\repos\GameEngine\GameEngine\GLEW\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\busch\source\repos\GameEngine\GameEngine\GLEW\bin\Release\Win32;C:\Users\busch\source\repos\GameEngine\GameEngine\GLEW\lib\Release\Win32;C:\Users\busch\source\repos\GameEngine\GameEngine\GLFW\lib-vc2019;C:\Users\busch\source\repos\GameEngine\GameEngine\GLEW\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\busch\source\repos\BuschMath\GameEngine\GameEngine\glm;C:\Users\busch\source\repos\BuschMath\GameEngine\GameEngine\GLFW\include;C:\Users\busch\source\repos\BuschMath\GameEngine\GameEngine\GLEW\include;C:\Users\busch\source\repos\GameEngine\GameEngine\glm;C:\Users\busch\source\repos\GameEngine\GameEngine\GLFW\include;C:\Users\busch\source\repos\GameEngine\GameEngine\GLEW\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\busch\source\repos\BuschMath\GameEngine\GameEngine\GLFW\lib-vc2019;C:\Users\busch\Documents\GLEW\glew-2.1.0-win32\glew-2.1.0\lib\Release\Win32;C:\Users\busch\source\repos\GameEngine\GameEngine\GLEW\bin\Release\Win32;C:\Users\busch\source\repos\GameEngine\GameEngine\GLEW\lib\Release\Win32;C:\Users\busch\source\repos\GameEngine\GameEngine\GLFW\lib-vc2019;C:\Users\busch\source\repos\GameEngine\GameEngine\GLEW\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -172,6 +172,7 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MessagingSystem.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

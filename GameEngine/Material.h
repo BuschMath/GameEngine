@@ -7,7 +7,7 @@
 
 class Material {
 public:
-    Material(const std::string& texturePath, glm::vec3 baseColor, const std::string& shaderProgram, 
+    Material(const std::string& texturePath, glm::vec3 baseColor, ShaderProgram* shaderProgram,
         float shininess)
         : m_texturePath(texturePath), m_color(baseColor), m_shaderProgram(shaderProgram), 
         m_shininess(shininess) {}
@@ -26,7 +26,7 @@ public:
 private:
     glm::vec3 m_color;
     std::string m_texturePath;
-    std::string m_shaderProgram;
+    ShaderProgram* m_shaderProgram;
     float m_shininess;
 };
 

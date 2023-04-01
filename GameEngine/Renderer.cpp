@@ -6,10 +6,10 @@
 void Renderer::render(RenderComponent* component) {
     // Set the material properties
     Material* material = component->getMaterial();
-    glUseProgram(material->getShaderProgram());
-    glUniform3f(glGetUniformLocation(material->getShaderProgram(), "material.color"),
+    glUseProgram(material->getShaderProgram()->getProgram());
+    glUniform3f(glGetUniformLocation(material->getShaderProgram()->getProgram(), "material.color"),
         material->getBaseColor().r, material->getBaseColor().g, material->getBaseColor().b);
-    glUniform1f(glGetUniformLocation(material->getShaderProgram(), "material.shininess"),
+    glUniform1f(glGetUniformLocation(material->getShaderProgram()->getProgram(), "material.shininess"),
         material->getShininess());
 
     // Set the model transformation matrix
@@ -18,7 +18,7 @@ void Renderer::render(RenderComponent* component) {
     modelMatrix = glm::rotate(modelMatrix, glm::radians(component->getRotation().y), glm::vec3(0.0f, 1.0f, 0.0f));
     modelMatrix = glm::rotate(modelMatrix, glm::radians(component->getRotation().z), glm::vec3(0.0f, 0.0f, 1.0f));
     modelMatrix = glm::scale(modelMatrix, component->getScale());
-    glUniformMatrix4fv(glGetUniformLocation(material->getShaderProgram(), "model"), 1, GL_FALSE, &modelMatrix[0][0]);
+    glUniformMatrix4fv(glGetUniformLocation(material->getShaderProgram()->getProgram(), "model"), 1, GL_FALSE, &modelMatrix[0][0]);
 
     // Render the mesh
     Mesh* mesh = component->getMesh();
