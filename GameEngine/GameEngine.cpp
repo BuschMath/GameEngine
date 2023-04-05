@@ -26,6 +26,12 @@ GameEngine::~GameEngine()
     }
 }
 
+void GameEngine::update(float deltaTime)
+{
+    m_messagingSystem->update(deltaTime);
+    m_renderSystem->update(deltaTime);
+}
+
 void GameEngine::run() 
 {
     // Set up game loop
@@ -71,9 +77,6 @@ void GameEngine::render()
 
     // Render systems
     m_renderSystem->render();
-
-    // Swap buffers
-    m_window.swapBuffers();
 }
 
 void GameEngine::cleanup()

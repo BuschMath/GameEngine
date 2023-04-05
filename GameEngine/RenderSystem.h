@@ -6,27 +6,30 @@
 #include "Window.h"
 #include "PositionComponent.h"
 #include "RenderComponent.h"
+#include "Renderer.h"
 #include <GLFW/glfw3.h>
 #include <memory>
 #include <vector>
 
 class RenderSystem : public SystemBase {
 public:
-    RenderSystem(Window& window) : m_window(window) {}
+    RenderSystem(Window& window) : m_window(window) {
+        r = new Renderer();
+    }
 
-    template <typename T>
     void update(float deltaTime) override {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         for (auto& entity : m_entities) {
-            auto position = entity->getComponent<PositionComponent>();
+            auto position = entity->getComponent<PositionComponent<float>>();
             auto render = entity->getComponent<RenderComponent>();
 
             if (position && render) {
                 glPushMatrix();
-                glTranslatef(position->x, position->y, position->z);
+                glTranslatef(position->x(), position->y(), position->z());
 
-                glBindTexture(GL_TEXTURE_2D, render->texture);
+                render->getTexture()->bind();
+                glBindTexture(GL_TEXTURE_2D, render->getTexture()->getId());
                 glBegin(GL_QUADS);
                 glTexCoord2f(0.0f, 0.0f); glVertex3f(-render->size, -render->size, -render->size);
                 glTexCoord2f(1.0f, 0.0f); glVertex3f(render->size, -render->size, -render->size);
@@ -53,29 +56,7 @@ public:
                 // get the RenderComponent for the entity
                 RenderComponent* renderComponent = entity->getComponent<RenderComponent>();
 
-                // bind the shader program
-                renderComponent->getMaterial()->getShaderProgram()->bind();
-
-                // set the material properties
-                renderComponent->getMaterial()->setUniformVec3("material.color", renderComponent->getColor());
-                renderComponent->getMaterial()->setUniformFloat("material.shininess", renderComponent->getShininess());
-
-                // set the transformation matrices
-                glm::mat4 modelMatrix = entity->getTransform().getModelMatrix();
-                glm::mat4 viewMatrix = m_camera.getViewMatrix();
-                glm::mat4 projectionMatrix = m_camera.getProjectionMatrix();
-                renderComponent->getMaterial()->setUniformMat4("modelMatrix", modelMatrix);
-                renderComponent->getMaterial()->setUniformMat4("viewMatrix", viewMatrix);
-                renderComponent->getMaterial()->setUniformMat4("projectionMatrix", projectionMatrix);
-
-                // bind the vertex array object
-                glBindVertexArray(renderComponent->getMesh()->getVAO());
-
-                // draw the mesh
-                glDrawElements(GL_TRIANGLES, renderComponent->getMesh()->getNumIndices(), GL_UNSIGNED_INT, 0);
-
-                // unbind the vertex array object
-                glBindVertexArray(0);
+                r->render(renderComponent);
             }
         }
 
@@ -94,6 +75,7 @@ public:
 private:
     Window& m_window;
     std::vector<Entity*> m_entities;
+    Renderer* r;
 };
 
 #endif // !RENDER_SYSTEM_H
