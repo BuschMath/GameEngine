@@ -64,12 +64,6 @@ void GameEngine::processInput(float deltaTime)
     m_window.processInput();
 }
 
-void GameEngine::update(float deltaTime)
-{
-    m_messagingSystem->update(deltaTime);
-    m_renderSystem->update(deltaTime);
-}
-
 void GameEngine::render()
 {
     // Clear screen

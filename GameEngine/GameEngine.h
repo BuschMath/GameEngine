@@ -23,7 +23,14 @@ public:
 
 private:
     void processInput(float deltaTime);
-    void update(float deltaTime);
+
+    template <typename T>
+    void update(float deltaTime)
+    {
+        m_messagingSystem->update(deltaTime);
+        m_renderSystem->update(deltaTime);
+    }
+
     void render();
 
     Window m_window;
