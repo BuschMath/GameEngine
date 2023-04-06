@@ -19,7 +19,7 @@ public:
     T* getComponent() {
         for (auto& component : m_components) {
             if (dynamic_cast<T*>(component)) {
-                return *component;
+                return dynamic_cast<T*>(component);
             }
         }
         return nullptr;

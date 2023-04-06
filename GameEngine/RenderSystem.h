@@ -7,42 +7,69 @@
 #include "PositionComponent.h"
 #include "RenderComponent.h"
 #include "Renderer.h"
+#include "Camera.h"
+#include "glm/gtc/matrix_transform.hpp"
 #include <GLFW/glfw3.h>
 #include <memory>
 #include <vector>
 
 class RenderSystem : public SystemBase {
 public:
+    RenderSystem() : m_window(*(new Window(800, 600, "Void"))){
+        r = new Renderer();
+        m_camera = new Camera();
+    }
+
     RenderSystem(Window& window) : m_window(window) {
         r = new Renderer();
+        m_camera = new Camera();
     }
 
     void update(float deltaTime) override {
+        render();
+        /*glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        // Set up the camera view matrix
+        glm::mat4 viewMatrix = m_camera->getViewMatrix();
+
+        // Set up the projection matrix
+        glm::mat4 projectionMatrix = glm::perspective(glm::radians(m_camera->getFOV()),
+            float(m_window.getWidth() / m_window.getHeight()), 0.1f, 100.0f);
+
+        // Loop through all the entities and render them
         for (auto& entity : m_entities) {
-            auto position = entity->getComponent<PositionComponent<float>>();
-            auto render = entity->getComponent<RenderComponent>();
+            // Get the render component for this entity
+            RenderComponent* renderComponent = entity->getComponent<RenderComponent>();
 
-            if (position && render) {
-                glPushMatrix();
-                glTranslatef(position->x(), position->y(), position->z());
+            // If the entity has a render component
+            if (renderComponent) {
+                // Bind the material
+                renderComponent->getMaterial()->getShaderProgram()->bind();
 
-                render->getTexture()->bind();
-                glBindTexture(GL_TEXTURE_2D, render->getTexture()->getId());
-                glBegin(GL_QUADS);
-                glTexCoord2f(0.0f, 0.0f); glVertex3f(-render->size, -render->size, -render->size);
-                glTexCoord2f(1.0f, 0.0f); glVertex3f(render->size, -render->size, -render->size);
-                glTexCoord2f(1.0f, 1.0f); glVertex3f(render->size, render->size, -render->size);
-                glTexCoord2f(0.0f, 1.0f); glVertex3f(-render->size, render->size, -render->size);
-                glEnd();
+                // Bind the mesh
+                renderComponent->getMesh()->bind();
 
-                glPopMatrix();
+                // Set the model matrix
+                glm::mat4 modelMatrix = glm::mat4(1.0f);
+                modelMatrix = glm::translate(modelMatrix, renderComponent->getPosition());
+                modelMatrix = glm::rotate(modelMatrix, glm::radians(renderComponent->getRotation().x), glm::vec3(1, 0, 0));
+                modelMatrix = glm::rotate(modelMatrix, glm::radians(renderComponent->getRotation().y), glm::vec3(0, 1, 0));
+                modelMatrix = glm::rotate(modelMatrix, glm::radians(renderComponent->getRotation().z), glm::vec3(0, 0, 1));
+                modelMatrix = glm::scale(modelMatrix, renderComponent->getScale());
+
+                // Set the uniforms in the shader program
+                renderComponent->getMaterial()->getShaderProgram()->setUniformMat4("model", modelMatrix);
+                renderComponent->getMaterial()->getShaderProgram()->setUniformMat4("view", viewMatrix);
+                renderComponent->getMaterial()->getShaderProgram()->setUniformMat4("projection", projectionMatrix);
+
+                // Draw the mesh
+                renderComponent->getMesh()->draw();
             }
-        }
+        }*/
 
-        glfwSwapBuffers(m_window.getWindow());
-        glfwPollEvents();
+        // Swap buffers
+        //m_window.update();
     }
 
     void render() {
@@ -76,6 +103,7 @@ private:
     Window& m_window;
     std::vector<Entity*> m_entities;
     Renderer* r;
+    Camera* m_camera;
 };
 
 #endif // !RENDER_SYSTEM_H

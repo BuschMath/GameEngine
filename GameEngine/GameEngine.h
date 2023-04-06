@@ -16,6 +16,7 @@ class GameEngine {
 public:
     GameEngine();
     GameEngine(int width, int height, const char* title);
+    ~GameEngine();
 
     void initialize();
     void run();

@@ -23,6 +23,8 @@ public:
     GLuint getVBO() const { return m_VBO; };
     GLuint getEBO() const { return m_EBO; };
 
+    void bind();
+    void unbind();
 
 private:
     std::vector<Vertex> m_vertices;

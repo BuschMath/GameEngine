@@ -42,3 +42,17 @@ const std::vector<unsigned int>& Mesh::getIndices() const
 {
     return m_indices;
 }
+
+void Mesh::bind()
+{
+    glBindVertexArray(m_VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
+}
+
+void Mesh::unbind()
+{
+    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
