@@ -1,10 +1,9 @@
 #ifndef GAME_ENGINE_H
 #define GAME_ENGINE_H
 
-#pragma once
-
 #include "Window.h"
-#include "Entity.h"
+#include "EntityFactory.h"
+#include "ComponentManager.h"
 #include "SystemBase.h"
 #include "RenderSystem.h"
 #include "MessagingSystem.h"
@@ -32,7 +31,8 @@ private:
     Window m_window;
     std::unique_ptr<RenderSystem> m_renderSystem;
     std::unique_ptr<MessagingSystem> m_messagingSystem;
-    std::vector<Entity*> m_entities;
+    std::unique_ptr<ConcreteEntityFactory<Component>> m_entityFactory;
+    std::unique_ptr<ComponentManager> m_componentManager;
     std::vector<SystemBase*> m_systems;
     bool m_running;
 };

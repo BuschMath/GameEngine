@@ -2,25 +2,16 @@
 
 GameEngine::GameEngine(int width, int height, const char* title)
     : m_window(width, height, title)
-{
-    // Initialize systems
-    m_renderSystem = std::make_unique<RenderSystem>();
-    m_messagingSystem = std::make_unique<MessagingSystem>();
+{   
 }
 
 GameEngine::GameEngine()
     : m_window(800, 600, "GameEngine"), m_running(false)
 {
-    m_entities.reserve(100);
-    m_systems.reserve(10);
 }
 
 GameEngine::~GameEngine()
 {
-    for (auto entity : m_entities) {
-        delete entity;
-    }
-
     for (auto system : m_systems) {
         delete system;
     }
@@ -59,10 +50,16 @@ void GameEngine::run()
 void GameEngine::initialize()
 {
     // Create entities and add them to the entity list
+    m_entityFactory = std::make_unique<ConcreteEntityFactory<Component>>();
+    m_componentManager = std::make_unique<ComponentManager>();
+
+    // Render system
+    m_renderSystem = std::make_unique<RenderSystem>();
 
     // Create systems and add them to the system list
 
     // Initialize each system
+    m_messagingSystem = std::make_unique<MessagingSystem>();
 }
 
 void GameEngine::processInput(float deltaTime)
